@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'webApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'webapp',
-        'USER': 'webappuser',
-        'PASSWORD': '4510',
+        'NAME': 'webapp', # имя базы данных созданной
+        'USER': 'webappuser', # имя пользователя
+        'PASSWORD': '4510', # пароль к пользователю
         'HOST': '127.0.0.1',
         'PORT': '',
     }
