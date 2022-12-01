@@ -14,7 +14,9 @@
 пользователя. Для ускорения операции с БД
 
 `ALTER ROLE [имя пользователя] SET client_encoding TO 'utf8';`
+
 `ALTER ROLE [имя пользователя] SET default_transaction_isolation TO 'read committed';`
+
 `ALTER ROLE [имя пользователя] SET timezone TO 'UTC';`
 
 Предоставляем пользователю БД права доступа к базе данных, которую создали
@@ -41,7 +43,9 @@
 Для работы нужно установить:
 
 `pip install Django`
+
 `pip install psycopg2`
+
 `pip install Pillow`
 
 !!! Запуск сервера и т.д. нужно из виртуального окружения
@@ -58,16 +62,19 @@
 ## Создание базы данных и просмотр sql-кода
 
 Команда создания sql-запроса:
+
 `python manage.py makemigrations`
 
 Команда для просмотра созданного sql-запроса
+
 `python manage.py sqlmigrate [название приложения] [номер созданной миграции]`
 
 `Команда для выполнения миграции
+
 `python manage.py migrate`
 
 ## Создание супер пользователя
 
 Для входа в админ-панель нужно создать пользователя
-`python manage.py createsuperuser`
 
+`python manage.py createsuperuser`
