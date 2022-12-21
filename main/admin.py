@@ -28,6 +28,6 @@ class Operation_on_productAdmin(admin.ModelAdmin):
 
 @admin.register(Operation_type)
 class Operation_typeAdmin(admin.ModelAdmin):
-    list_display = ('operation_type', 'percent', 'arrival_date')
+    list_display = ('operation_type', 'percent',)
 
     list_display_links = ('operation_type',)

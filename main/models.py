@@ -2,15 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Product(models.Model):
-    title = models.CharField(verbose_name="Наименование", max_length=25)
+    title = models.CharField(verbose_name="Наименование", max_length=75)
     category = models.CharField(verbose_name="Категория", max_length=25)
     # category = models.ForeignKey("Category", on_delete=models.CASCADE) # не знаю что писать в ограничение при удалении
     price = models.IntegerField(verbose_name="Цена") # не Decimal???
     # price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
     amount = models.IntegerField(verbose_name="Количество")
-    expiration_date = models.DateTimeField(verbose_name="Срок годности")
-    image = models.ImageField(verbose_name="Изображение", upload_to="photos/")
-    description = models.TextField(verbose_name="Описание", max_length=1000)
+    expiration_date = models.DateTimeField(verbose_name="Срок годности", null=True, blank=True)
+    image = models.ImageField(verbose_name="Изображение", upload_to="photos/", null=True, blank=True)
+    description = models.TextField(verbose_name="Описание", max_length=1000, null=True, blank=True)
     manufacturer = models.ForeignKey('Manufacturer', on_delete=models.CASCADE,
                                     verbose_name="Производитель") # id к названию не надо добавлять Django при миграции сам добавит
 
@@ -23,7 +23,7 @@ class Product(models.Model):
         verbose_name = 'Товар'
 
 class Manufacturer(models.Model):
-    manufacturer = models.CharField(verbose_name="Производитель", max_length=25)
+    manufacturer = models.CharField(verbose_name="Производитель", max_length=40)
     city = models.CharField(verbose_name="Город", max_length=15)
 
     def __str__(self):
@@ -36,8 +36,7 @@ class Manufacturer(models.Model):
 
 class Operation_type(models.Model):
     operation_type = models.CharField(verbose_name="Тип операции", max_length=15)
-    percent = models.IntegerField(verbose_name="Процент")
-    arrival_date = models.DateTimeField()
+    percent = models.IntegerField(verbose_name="Процент", null=True, blank=True)
 
     def __str__(self):
         return self.operation_type

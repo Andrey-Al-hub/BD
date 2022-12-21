@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
-    'bootstrap5',
+    # 'bootstrap5',
     'main.apps.MainConfig',
 ]
 
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'webApp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,11 +80,11 @@ WSGI_APPLICATION = 'webApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'webapp', # имя базы данных созданной
-        'USER': 'webappuser', # имя пользователя
-        'PASSWORD': '4510', # пароль к пользователю
-        'HOST': '127.0.0.1',
-        'PORT': '',
+        'NAME': 'db0091_2_kurs', # имя базы данных созданной
+        'USER': 'st0092', # имя пользователя
+        'PASSWORD': 'qwerty92', # пароль к пользователю
+        'HOST': '172.20.8.18',
+        'PORT': '5432',
     }
 }
 
@@ -123,8 +123,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = 'static/main/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/main/')
 STATICFILES_DIRS = []
 
 # Default primary key field type
