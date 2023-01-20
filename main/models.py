@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# class User(User):
+#     pass
+
 class Product(models.Model):
     title = models.CharField(verbose_name="Наименование", max_length=75)
     category = models.CharField(verbose_name="Категория", max_length=25)
@@ -9,7 +12,7 @@ class Product(models.Model):
     # price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
     amount = models.IntegerField(verbose_name="Количество")
     expiration_date = models.DateTimeField(verbose_name="Срок годности", null=True, blank=True)
-    image = models.ImageField(verbose_name="Изображение", upload_to="photos/", null=True, blank=True)
+    image = models.ImageField(verbose_name="Изображение", upload_to="img/", null=True, blank=True)
     description = models.TextField(verbose_name="Описание", max_length=1000, null=True, blank=True)
     manufacturer = models.ForeignKey('Manufacturer', on_delete=models.CASCADE,
                                     verbose_name="Производитель") # id к названию не надо добавлять Django при миграции сам добавит
@@ -35,7 +38,7 @@ class Manufacturer(models.Model):
         verbose_name = 'Производитель'
 
 class Operation_type(models.Model):
-    operation_type = models.CharField(verbose_name="Тип операции", max_length=15)
+    operation_type = models.CharField(verbose_name="Тип операции", max_length=40)
     percent = models.IntegerField(verbose_name="Процент", null=True, blank=True)
 
     def __str__(self):
@@ -65,7 +68,7 @@ class Operation_on_product(models.Model):
     product = models.ForeignKey("Product", on_delete=models.CASCADE,
                                 verbose_name="Товар")
     amount_of_product = models.IntegerField("Количество товаров")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, 
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
                             verbose_name="Пользователь")
 
     class Meta:

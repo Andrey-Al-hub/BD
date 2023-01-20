@@ -1,0 +1,54 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/style.css' %}">
+<script src="{% static 'main/js/bootstrap.bundle.min.js' %}"></script>
+<div class="fixed-top">
+       <!-- top-bar -->
+        <div class="top-bar"> </div>
+        <div class="container-fluid">
+            <!-- navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light">
+
+                    <a class="navbar-brand" href="{% url 'homepage' %}"> Учёт товаров на складе </a>
+                    <div id="current_user">
+                        Пользователь:<br>
+                        {% if request.user.is_staff %}
+                            <div class="text-danger">{{ user }} </div>
+                        {% else %}
+                            {{ user }}
+                        {% endif %}
+                    </div>
+
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+
+                  <div class="collapse navbar-collapse justify-content-right" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+
+                      <li class="nav-item">
+                        <a class="nav-link" href="#section1">Операции</a>
+                      </li>
+
+                      <li class="nav-item">
+                        <a class="nav-link" href="#section2">Картотека</a>
+                      </li>
+
+                    {% if request.user.is_staff %}
+                      <li class="nav-item">
+                        <a class="nav-link" style="white-space: nowrap;" href="{% url 'register' %}">Зарегистрировать пользователя</a>
+                      </li>
+                    {% endif %}
+
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+                      </li>
+
+                    </ul>
+                  </div>
+
+            </nav>
+        </div>
+    </div>
+
