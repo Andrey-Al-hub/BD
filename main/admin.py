@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Manufacturer, Operation_on_product, Operation_type, Product
+from .models import *
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'price', 'amount', 

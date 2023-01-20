@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Аутентификация</title>
+    {% load static %}
+</head>
+<body>
+{% include 'main/base.html' %}
+<div class="content" id="section1">
+
+    <div class="container-fluid">
+        <h1>Авторизация</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-error"> {{ form.non_field_errors }} </div>
+
+            {% for f in form %}
+                <p> <label class="form-label" for="{{ f.id_for_label }}"> {{f.label}}: </label> {{ f }} </p>
+                <div class="form-error"> {{ f.errors }} </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-outline-primary btn-sm col-2">Войти</button>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

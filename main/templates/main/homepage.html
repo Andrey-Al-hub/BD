@@ -1,0 +1,272 @@
+<!doctype html>
+{% if request.user.is_authenticated %}
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Главная </title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/cards.css' %}">
+</head>
+<body>
+{% include 'main/base_homepage.html' %}
+<div class="content" id="section1">
+    <h1 class="text-center">Операции</h1>
+
+        <div class="container-fluid">
+        <div class="row">
+
+            <!-- 1 колонка -->
+            <div class="col-lg-3 col-md-12 col-sm-12">
+                    Выберите операцию:
+                    <select class="form-control" style="text-align: center" id="operation_selector">
+                        <option>-</option>
+                        <option>Приход товара</option>
+                        <option>Списание товара</option>
+<!--                        <option>Отчет по приходу товара</option>-->
+<!--                        <option>Отчет по реализации товара</option>-->
+                    </select>
+                    <div class="row justify-content-center">
+                        <button type="button" class="btn btn-primary col-6" id="operation_confirm_button">Подтвердить</button>
+                    </div>
+            </div>
+
+            <!--2 колонка -->
+            <div class="col-lg-9 col-md-12 col-sm-12" id="operation_print">
+
+                <!-- Операция: Приход товара -->
+
+                <div class="operation row">
+
+                <!-- ВЫБОР ТОВАРА -->
+                    <div class="row">
+                        <div id="product_income">
+                            <select class="form-select" id="income_selector">
+                                <option value='select'>Выберите товар</option>
+                                {% for product in pr %}
+                                <option> {{ product.title }} </option>
+                                {% endfor %}
+                                <option>Добавить новый товар...</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- СУЩЕСТВУЮЩИЙ ТОВАР -->
+                    <div class="row" id="income_value">
+                        <form class="operation_form col-12" method="POST">
+                            <div class="col-6 input_values">
+                                {% csrf_token %}
+                                <input required type="hidden"
+                                       name="income_title" value="">
+                                <input class="form-control" required type="number" min="1"
+                                       name="income_amount" placeholder="Количество поступившего товара">
+                                <button type="submit" class="btn btn-outline-primary btn-sm col-4 confirm_button">
+                                    Подтвердить
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- НОВЫЙ ТОВАР -->
+                    <div class="row" id="new_income_value">
+                        <form class="operation_form col-12" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row input_values">
+                                <div class="row">
+                                    <div class="col-12"> {{ income_form.title }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"> {{ income_form.category }} </div>
+                                    <div class="col-3"> {{ income_form.price }} </div>
+                                    <div class="col-3"> {{ income_form.amount }} </div>
+                                </div>
+                                <div class="row justify-content-between">
+                                    <div class="col-9">
+                                        <div class="row justify-content-left">
+                                            <div class="col-auto">
+                                                <label for="id_image" class="col-form-label">Изображение:</label>
+                                            </div>
+                                            <div class="col-auto ps-1">
+                                                {{ income_form.image }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3"> {{ income_form.expiration_date }} </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12"> {{ income_form.description }} </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-10"> {{ income_form.manufacturer }} </div>
+                                </div>
+
+                                <div class="row justify-content-center" id="new_manufacturer">
+                                    <div class="col-8">
+                                        <input class="form-control" type="text" maxlength="40"
+                                           name="new_manufacturer" placeholder="Добавить производителя">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center" id="new_manufacturer_city">
+                                    <div class="col-8">
+                                        <input class="form-control" type="text" maxlength="15"
+                                           name="new_manufacturer_city" placeholder="Город">
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <button type="submit" class="btn btn-outline-primary btn-sm col-4"
+                                        id="income_new_button">Добавить</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <!-- Операция: Списание товара -->
+                <div class="operation row">
+                    <!-- ВЫБОР ТОВАРА -->
+                    <div class="row">
+                    <form class="col-12" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div id="product_write_off">
+                                <select class="form-select" id="write_off_selector" name="write_off_title">
+                                    <option value='select'>Выберите товар</option>
+                                    {% for product in pr %}
+                                    <option> {{ product.title }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row operation_form" id="write_off_value">
+                            <div class="col-6 input_values">
+                                <input class="form-control" required type="number" min="1"
+                                       name="write_off_amount" placeholder="Количество списываемого товара">
+                                <button type="submit" class="btn btn-outline-primary btn-sm col-4 confirm_button">
+                                    Подтвердить
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+</div>
+
+<div class="content" id="section2">
+    <div class="container-fluid">
+    <div class="row">
+
+        <h1 class="text-center">Картотека</h1>
+
+        {% for product in pr %}
+
+          <div class="col-md-6 col-lg-3 col-sm-12">
+            <div class="card">
+
+              <div class="card-img">
+                  {% if product.image %}
+                   <img src="{{ product.image.url }}" width="100%">
+                  {% endif %}
+              </div>
+
+              <div class="card-body">
+
+                  <div class="card-title">
+                      <b> Наименование: </b> <br> {{ product.title }}
+                  </div>
+
+                    <p class="card-text">
+                      <b> Категория: </b> <br> {{ product.category }}
+                    </p>
+
+                    <p class="card-text">
+                      <b> Цена: </b> <br> {{ product.price }}
+                    </p>
+
+                    <p class="card-text">
+                      <b> Количество: </b> <br> {{ product.amount}}
+                    </p>
+
+                    <p class="card-text">
+                      <b> Срок годности: </b> <br>
+                        {% if product.expiration_date %}
+                            {{ product.expiration_date }}
+                        {% else %}
+                            не ограничен
+                        {% endif %}
+                    </p>
+
+                    <p class="card-text">
+                      <b> Производитель: </b> <br> {{ product.manufacturer}}
+                    </p>
+
+              </div>
+
+              <div class="card-footer">
+                <a href="#{{product.id}}" class="card-link popup-link"> Подробнее </a>
+              </div>
+
+            </div>
+          </div>
+
+        {% endfor %}
+    </div>
+
+    {% for product in pr %}
+    <div id="{{product.id}}" class="popup">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="#navbar" class="popup__close close-popup">X</a>
+
+                <div class="row">
+                    <div class="popup__title"> <b> {{ product.title }} </b> </div>
+
+                    <div class="col-md-5 col-lg-5 col-sm-5">
+                    {% if product.image %}
+                       <img src="{{ product.image.url }}" width="100%">
+                      {% endif %}
+                    </div>
+                    <div class="popup__text col">
+
+                            <p> <b> Категория: </b> {{ product.category }} </p>
+
+                            <p> <b> Цена: </b> {{ product.price }} </p>
+
+                            <p> <b> Количество: </b> {{ product.amount }} </p>
+
+                            <p> <b> Срок годности: </b>
+                                {% if product.expiration_date %}
+                                    {{ product.expiration_date }}
+                                {% else %}
+                                    не ограничен
+                                {% endif %}
+                            </p>
+
+                            <p> <b> Производитель: </b> {{ product.manufacturer }} </p>
+                    </div>
+                    <p> <b> Описание: </b> {{ product.description }} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+<script src="{% static 'main/js/script.js' %}"></script>
+<script src="{% static 'main/js/popup.js' %}"></script>
+</body>
+
+{% else %}
+<meta http-equiv="REFRESH" content="0;url=http://127.0.0.1:8000/main/login/">
+{% endif %}
+
+</html>
+
+

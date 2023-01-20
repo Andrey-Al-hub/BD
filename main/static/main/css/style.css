@@ -8,8 +8,17 @@ a {
     text-decoration: none;
 }
 
+h1{
+    margin-bottom: 25px;
+}
+
 .container-fluid{
     padding: 0 20px 0 20px;
+}
+
+#current_user{
+    margin: 0 10px 0 25px;
+    font-size: small;
 }
 
 .top-bar {
@@ -19,7 +28,12 @@ a {
 
 .navbar {
     border-bottom: 5px solid #0099ff;
+    background-color: white;
     box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
+}
+
+.navbar-brand{
+    padding-left: 8px;
 }
 
 .navbar-collapse {
@@ -28,15 +42,36 @@ a {
 
 .content {
     position: relative;
-    padding: 8em 10px 0 10px;
+    padding: 9em 10px 0 10px;
 }
 
 .row{
+    margin-bottom: 10px;
+    padding-right: 0;
+}
+
+/*.text-stroke{
+    color: white;
+    font-size: large;
+    -webkit-text-stroke: 0.5px black;
+}*/
+
+.btn-primary {
     margin-top: 10px;
 }
 
-.btn {
+#operation_print{
+/*    height: 600px;*/
+/*    background-size: 100%;
+    background-repeat: no-repeat;
+    packground-position: top;
+    packground-attachment: fixed;*/
     margin-top: 10px;
+/*    padding-top: 10px;*/
+}
+
+#operation_selector {
+    margin-top: 6px;
 }
 
 .operation {
@@ -47,11 +82,20 @@ a {
     padding: 0 20px 10px 20px;
 }
 
-#income_value{
+.input_values{
     margin-top: 10px;
+    padding-left: 12px;
+}
+
+#income_value{
     display: none;
 }
 
-#income_confirm_button{
+#new_income_value{
+    display: none;
+}
+
+.confirm_button{
     margin-left: 10px;
+    margin-top: 10px;
 }
