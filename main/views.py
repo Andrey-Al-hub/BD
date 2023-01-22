@@ -6,11 +6,11 @@ from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
 
-
+# перенаправляет с корневого адреса на домашнюю страницу
 def redirect_from_host_to_homepage(request):
     return redirect('homepage', permanent=True)
 
-
+# регистрация
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'main/register.html'
@@ -19,7 +19,7 @@ class RegisterUser(CreateView):
         context = super().get_context_data(**kwargs)
         return dict(list(context.items()))
 
-
+# авторизация
 class LoginUser(LoginView):
     form_class = LoginUserForm
     template_name = 'main/login.html'
@@ -29,15 +29,15 @@ class LoginUser(LoginView):
     def get_success_url (self):
         return reverse_lazy('homepage')
 
-
+# выход из учётной записи
 def logout_user(request):
     logout(request)
     return redirect('login')
 
-
+# выгрузка домашней страницы и всех объектов на ней
 def loadHomepage(request):
 
-    product_to_change = request.POST.get("income_title", "")
+    product_to_change = request.POST.get("income_title", "") # приход имеющегося товара
     if product_to_change != '':
         amount_add = request.POST.get("income_amount", "")
         product_db = Product.objects.get(title=product_to_change)
@@ -46,7 +46,7 @@ def loadHomepage(request):
         print('ТОВАР ДОБАВЛЕН')
         return redirect('homepage.html')
 
-    product_to_write_off = request.POST.get("write_off_title", "")
+    product_to_write_off = request.POST.get("write_off_title", "") # списание товара
     if product_to_write_off != '':
         amount_write_off = request.POST.get("write_off_amount", "")
         product_db = Product.objects.get(title=product_to_write_off)
@@ -59,7 +59,7 @@ def loadHomepage(request):
         income_form = AddIncomeForm(request.POST, request.FILES)
         if income_form.is_valid():
             manuf_title = request.POST.get("new_manufacturer", "")
-            if manuf_title != '':
+            if manuf_title != '':   # приход нового товара с новым производителем
                 manuf_db = Manufacturer()
                 manuf_db.manufacturer = manuf_title
                 manuf_db.city = request.POST.get("new_manufacturer_city", "")
@@ -78,7 +78,7 @@ def loadHomepage(request):
                 print('СОЗДАНО С НОВЫМ ПРОИЗВОДИТЕЛЕМ')
                 return redirect('homepage.html')
             else:
-                income_form.save()
+                income_form.save()  # приход нового товара с имеющимся в бд производителем
                 print('СОЗДАНО БЕЗ НОВОГО ПРОИЗВОДИТЕЛЯ')
                 return redirect('homepage.html')
 
