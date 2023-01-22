@@ -50,24 +50,12 @@ h1{
     padding-right: 0;
 }
 
-/*.text-stroke{
-    color: white;
-    font-size: large;
-    -webkit-text-stroke: 0.5px black;
-}*/
-
 .btn-primary {
     margin-top: 10px;
 }
 
 #operation_print{
-/*    height: 600px;*/
-/*    background-size: 100%;
-    background-repeat: no-repeat;
-    packground-position: top;
-    packground-attachment: fixed;*/
     margin-top: 10px;
-/*    padding-top: 10px;*/
 }
 
 #operation_selector {

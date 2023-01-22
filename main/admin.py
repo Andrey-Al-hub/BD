@@ -8,11 +8,10 @@ class ProductAdmin(admin.ModelAdmin):
 
     list_display_links = ('title',)
 
-    search_fields = ('title', 'category') # по каким полям будет проходить поиск
+    search_fields = ('title', 'category')
 
     list_filter = ('manufacturer', 'price')
 
-    # list_editable = () # список полей доступных для редактирования
 
 admin.site.register(Product, ProductAdmin)
 
