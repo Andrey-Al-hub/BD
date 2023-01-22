@@ -51,27 +51,3 @@ class AddIncomeForm(forms.ModelForm):
                                                  'placeholder': "Описание"}),
             'manufacturer': forms.Select(attrs={'class': 'form-control', 'id': 'income_manufacturer'})
         }
-    # input_operations = forms.ModelChoiceField(queryset=Product.objects.all(), label='', empty_label='Выберите товар',
-    #     widget=forms.Select(attrs={'class': 'form-select', 'id':'income_selector', 'name':"income_title"}))
-
-# class AddManufacturerForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#
-#     class Meta:
-#         model = Manufacturer
-#         fields = '__all__'
-#         widgets = {
-#             'manufacturer': forms.TextInput(attrs={'class': 'form-control',
-#                                                    'placeholder': "Добавить производителя"}),
-#             'city': forms.TextInput(attrs={'class': 'form-control',
-#                                            'placeholder': "Город"})
-#         }
-
-# class SelectProductForm(forms.Form):
-#     title = forms.ModelChoiceField(queryset=Product.objects.all(), empty_label='Выберите товар',
-#                                    widget=forms.Select(attrs={'class': 'form-select', 'id': 'income_selector'}))
-#
-#
-# class AmountIncomeForm(forms.Form):
-#     amount = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))

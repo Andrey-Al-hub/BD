@@ -18,14 +18,11 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from webApp import settings
 from main.views import redirect_from_host_to_homepage
-# from main.views import *
 
 urlpatterns = [
     path('', redirect_from_host_to_homepage),
     path('admin/', admin.site.urls),
     path('main/', include('main.urls')),
-    # path('', include('django.contrib.auth.urls'))
-    # path('main/homepage.html', index)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
